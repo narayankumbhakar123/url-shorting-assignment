@@ -1,0 +1,13 @@
+<h1>Shortened URL</h1>
+
+<p>
+  <strong>Original URL:</strong>
+  <%= @url.original_url %>
+</p>
+
+<p>
+  <strong>Shortened URL:</strong>
+  <%= link_to @url.short_url, short_url_path(@url.short_url), target: '_blank' %>
+</p>
+
+<%= link_to 'Back to Index', root_path, class: 'btn btn-secondary' %>

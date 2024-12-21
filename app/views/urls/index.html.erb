@@ -1,0 +1,22 @@
+<h1>URL Shortener</h1>
+
+<%= link_to 'Create New Shortened URL', new_url_path, class: 'btn btn-primary' %>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Original URL</th>
+      <th>Shortened URL</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @urls.each do |url| %>
+      <tr>
+        <td><%= url.original_url %></td>
+        <td><%= link_to url.short_url, short_url_path(url.short_url), target: '_blank' %></td>
+        <td><%= link_to 'View', url_path(url), class: 'btn btn-info' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

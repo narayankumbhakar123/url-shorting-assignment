@@ -1,0 +1,70 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/urls":
+    post:
+      summary: Create a shortened URL
+      tags:
+      - URLs
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer token for authentication
+        schema:
+          type: string
+      responses:
+        '201':
+          description: URL created
+        '422':
+          description: Invalid URL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                original_url:
+                  type: string
+              required:
+              - original_url
+  "/api/v1/urls/{short_url}":
+    get:
+      summary: Retrieve original URL by short URL
+      tags:
+      - URLs
+      security:
+      - BearerAuth: []
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer token for authentication
+        schema:
+          type: string
+      - name: short_url
+        in: path
+        description: Shortened URL identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: URL found
+        '404':
+          description: URL not found
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+security:
+- BearerAuth: []
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
